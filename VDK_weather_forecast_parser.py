@@ -3,18 +3,18 @@ import requests
 import json
 import csv
 
-# url = "https://www.gismeteo.ru/weather-vladivostok-4877/month/"
-#
-# headers = {
-#     "Accept": "*/*",
-#     "User-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 YaBrowser/23.3.4.603 Yowser/2.5 Safari/537.36"
-# }
-#
-# req = requests.get(url, headers=headers)
-# src = req.text
-#
-# with open("index.html", "w", encoding="utf-8") as file:
-#  file.write(src)
+url = "https://www.gismeteo.ru/weather-vladivostok-4877/month/"
+
+headers = {
+    "Accept": "*/*",
+    "User-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 YaBrowser/23.3.4.603 Yowser/2.5 Safari/537.36"
+}
+
+req = requests.get(url, headers=headers)
+src = req.text
+
+with open("index.html", "w", encoding="utf-8") as file:
+ file.write(src)
 
 with open("index.html", encoding="utf-8") as file:
      src = file.read()
@@ -33,7 +33,7 @@ Sunday = table_head[6].text
 
 week = [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday]
 
-with open(f"vladivostok_weather_mounth.csv", "w", newline='') as file:
+with open(f"weather_report.csv", "w", newline='') as file:
     writer = csv.writer(file, delimiter=";")
     writer.writerow(
         week
