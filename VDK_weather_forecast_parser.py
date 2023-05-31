@@ -62,7 +62,7 @@ k = 7
 for item in range (0, len(all_days), k):
     # print(all_days[item:item+k])
 
-    with open(f"vladivostok_weather_mounth.csv", "a", newline='') as file:
+    with open(f"weather_report.csv", "a", newline='') as file:
         writer = csv.writer(file, delimiter=";")
         writer.writerow(
             all_days[item:item + k]
