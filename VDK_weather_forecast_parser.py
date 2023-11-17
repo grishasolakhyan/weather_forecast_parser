@@ -13,31 +13,29 @@ headers = {
 req = requests.get(url, headers=headers)
 src = req.text
 
-with open("index.html", "w", encoding="utf-8") as file:
- file.write(src)
+with open("index.html", "w", encoding='utf-8') as file:
+    file.write(src)
 
-with open("index.html", encoding="utf-8") as file:
-     src = file.read()
+with open("index.html", encoding='utf-8') as file:
+    src = file.read()
 
 soup = BeautifulSoup(src, "lxml")
 
 #собираем заголовки таблицы
-table_head = soup.find(class_="widget-header").find_all(class_="day-name")
-Monday = table_head[0].text
-Tuesday = table_head[1].text
-Wednesday = table_head[2].text
-Thursday = table_head[3].text
-Friday = table_head[4].text
-Saturday = table_head[5].text
-Sunday = table_head[6].text
 
-week = [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday]
+Mon = 'Monday'
+Tue = 'Tuesday'
+Wed = 'Wednesday'
+Thu = 'Thursday'
+Fri = 'Friday'
+Sat = 'Saturday'
+Sun = 'Sunday'
 
-with open(f"weather_report.csv", "w", newline='') as file:
+week = [Mon, Tue, Wed, Thu, Fri, Sat, Sun]
+
+with open(f"weather_report.csv", "w", encoding="cp1251", newline='') as file:
     writer = csv.writer(file, delimiter=";")
-    writer.writerow(
-        week
-    )
+    writer.writerow(week)
 
 all_weather_days = soup.find_all(class_="row-item")
 all_days = []
@@ -56,14 +54,10 @@ for item in range (0, len(all_days)-1):
         month_name = check_day[ind_space+1:]
         if ' ' not in all_days[item+1][0]:
             all_days[item+1][0] = all_days[item+1][0] + " " + month_name
-print(all_days)
 
 k = 7
 for item in range (0, len(all_days), k):
-    # print(all_days[item:item+k])
 
-    with open(f"weather_report.csv", "a", newline='') as file:
-        writer = csv.writer(file, delimiter=";")
-        writer.writerow(
-            all_days[item:item + k]
-        )
+    with open(f'weather_report.csv', 'a', encoding='utf-8', newline='') as file:
+        writer = csv.writer(file, delimiter=';')
+        writer.writerow(all_days[item:item + k])
